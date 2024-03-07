@@ -49,6 +49,21 @@ router.get("/admin/delete/:id", async (req, res) => {
   }
 });
 
+//Shyam
+router.get("/user/weblog", async (req, res) => {
+  try {
+      const webdata = await data.find({});
+      if (webdata.length > 0) {
+          res.render("weblogView", { webdata });
+      } else {
+          res.status(404).send("No data found.");
+      }
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: err.message });
+  }
+});
+
 //Kowsalya
 router.get("/user/frequentpage", async (req, res) => {
   try {
@@ -84,5 +99,7 @@ router.get("/user/frequentlyviewuser", async (req, res) => {
     }
   
   });
+ 
+
 
 module.exports = router;

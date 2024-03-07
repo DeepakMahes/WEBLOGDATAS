@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebLogData Admin Panel</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+
+    table.table.table-striped.table-bordered {
+      color: white;
+    }
+
+    table.table-striped.table-bordered thead {
+      background-color: #343a40;
+    }
+
+    table.table-striped.table-bordered tbody{
+      color:rgb(253, 253, 253);
+      background-color: grey;
+    }
+
+  </style>
+</head>
+<body>
+    <%- include('menu') %>
+    <main class="container mt-4"></main>
+    <h1 class="mb-4 text-center text-white">User Details</h1>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">Password</th>
+                <th scope="col">User Type</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% details.forEach((detail) => { %>
+                <tr>
+                    <td><%= detail.username %></td>
+                    <td><%= detail.password %></td>
+                    <td><%= detail.usertype %></td>
+                    <td>
+                        <a href="/admin/edit/<%= detail._id %>">Edit</a>
+                        <a href="/admin/delete/<%= detail._id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

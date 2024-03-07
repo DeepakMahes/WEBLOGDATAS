@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 const weblog = new mongoose.Schema({
-    ip_address: Number,
+    ip_address: String,
     user_name: String,
-    timestamp: Date,
+    timestamp: String,
     http_method: String,
     from_page: String,
     to_page: String,

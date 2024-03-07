@@ -46,5 +46,20 @@ router.get("/admin/delete/:id", async (req, res) => {
         res.status(500).send("Error deleting the data");
     }
 });
+//tamilmani code
+router.get("/user/frequentlyviewuser", async (req, res) => {
+    try {
+    const frequentlyviewuser = await data.aggregate([
+                { $group: { _id: "$user_name", count: { $sum: 1 } } },
+                { $sort: { count: -1} },
+                { $limit: 5 },
+            ]);
+    res.render("fvuser", {frequentlyviewuser }); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+  
+  });
 
 module.exports = router;

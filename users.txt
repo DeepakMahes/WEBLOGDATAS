@@ -1,4 +1,4 @@
-[{
+db.users.insertMany([{
 
         username: "deepak",
         password: "deepak123",
@@ -27,4 +27,4 @@
         username: "thiru",
         password: "thiru123",
         usertype: "admin"
-    }]
+    }])

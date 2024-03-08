@@ -92,7 +92,7 @@ router.get("/user/frequentlyviewuser", async (req, res) => {
                 { $sort: { count: -1} },
                 { $limit: 5 },
             ]);
-    res.render("fvuser", {frequentlyviewuser }); 
+    res.render("fvusers", {frequentlyviewuser }); 
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

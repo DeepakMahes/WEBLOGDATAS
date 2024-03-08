@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { user } = require('../models/schema');
+const weblogdatarouter = require("./weblogdata");
 
 router.get("/login", (req, res) => {
     try {
@@ -18,7 +19,7 @@ router.get("/userverfication", async (req, res) => {
             return res.status(400).send("Invalid username, password, or user type");
         }
         if(existingUser.usertype==="admin"){
-            res.render('adminview')
+            res.redirect('/admin')
         }
         else{
             res.render('menu')
@@ -58,5 +59,5 @@ router.post('/user', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
+router.use(weblogdatarouter);
 module.exports = router;

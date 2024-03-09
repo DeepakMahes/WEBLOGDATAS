@@ -31,7 +31,6 @@ router.post("/admin/edit/:id", async (req, res) => {
     const updatedUser = await user.findByIdAndUpdate(id, updateData, {
       new: true,
     });
-    console.log(updatedUser);
     res.redirect("/admin");
   } catch (error) {
     console.error(error);

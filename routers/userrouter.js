@@ -46,7 +46,7 @@ router.post('/login/signup/entry', async (req, res) => {
         const existingUser = await user.findOne({ username });
         
 
-        if (existingUser && existingUser.password === pass) {
+        if (existingUser && existingUser.password === password) {
             return res.status(400).json({ message: "Username already exists. Please choose a different one." });
         }
         if (password !== confirm_password) {

@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
     usertype: {
         type: String,
         enum: ['admin', 'user'],
+        default: "user"
         
     }
 }, { versionKey: false });

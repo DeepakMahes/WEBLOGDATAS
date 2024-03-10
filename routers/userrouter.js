@@ -10,18 +10,18 @@ router.get("/login", (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-router.get("/userverfication", async (req, res) => {
-    const { username, password, user_type } = req.query; 
+router.get("/login/userverfication", async (req, res) => {
+    const { username, password} = req.query; 
     try {
 
-        const existingUser = await user.findOne({ username });
-        if (!existingUser || existingUser.password !== password || existingUser.usertype !== user_type) {
+        const existingUser = await user.findOne({ username ,password});
+        if (!existingUser || existingUser.password !== password ) {
             return res.status(400).send("Invalid username, password, or user type");
         }
         if(existingUser.usertype==="admin"){
-            res.redirect('/admin')
+            res.render('main')
         }
-        else{
+        else if (existingUser.usertype==="user"){
             res.render('menu')
         }
 
@@ -32,7 +32,7 @@ router.get("/userverfication", async (req, res) => {
 
 
 
-router.get("/registration", (req, res) => {
+router.get("/login/registration", (req, res) => {
     try {
         res.render("registration");
     } catch (error) {
@@ -40,7 +40,7 @@ router.get("/registration", (req, res) => {
     }
 });
 
-router.post('/user', async (req, res) => {
+router.post('/login/signup/entry', async (req, res) => {
     const { username, password, confirm_password, user_type } = req.body;
     try {
         const existingUser = await user.findOne({ username });

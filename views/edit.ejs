@@ -19,7 +19,7 @@
         background-color: transparent;
       }
       .card-header {
-            color:black;
+            color:white;
             border-radius: 10px 10px 0 0;
             padding: 10px;
             text-align: center;
@@ -92,7 +92,7 @@ color: white;
     <nav>
         <h1 class="logo">Web Log DataMining</h1>
         <ul>
-          <li><a href="/admin">Admin</a></li>
+          <li><a href="/login/admin">Admin</a></li>
         </ul>
       </nav>
    <div class="edit-img">
@@ -104,7 +104,7 @@ color: white;
                         Edit User Details
                     </div>
                     <div class="card-body">
-                        <form action="/admin/edit/<%= detail._id %>" method="post">
+                        <form action="/login/admin/edit/<%= detail._id %>" method="post">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" value="<%= detail.username %>">

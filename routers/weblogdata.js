@@ -3,16 +3,16 @@ const router = express.Router();
 const {data, user} = require("../models/schema");
 router.use(express.urlencoded({extended: true}));
 
-router.get("/admin", async (req, res) => {
+router.get("/login/admin", async (req, res) => {
   try {
     const details = await user.find();
     res.render("adminview", {details: details});
   } catch (error) {
-    console.error(error);
+
     res.status(500).json({message: "Internal server error"});
   }
 });
-router.route("/admin/edit/:id").get(async (req, res) => {
+router.get("/login/admin/edit/:id",async (req, res) => {
   try {
     const id = req.params.id;
     const update = await user.findById(id);
@@ -24,24 +24,24 @@ router.route("/admin/edit/:id").get(async (req, res) => {
     res.status(500).json({message: error.message});
   }
 });
-router.post("/admin/edit/:id", async (req, res) => {
+router.post("/login/admin/edit/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const updateData = req.body;
     const updatedUser = await user.findByIdAndUpdate(id, updateData, {
       new: true,
     });
-    res.redirect("/admin");
+    res.redirect("/login/admin");
   } catch (error) {
-    console.error(error);
+    
     res.status(500).json({message: error.message});
   }
 });
-router.get("/admin/delete/:id", async (req, res) => {
+router.get("/login/admin/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
     await user.findByIdAndDelete(id);
-    res.redirect("/admin");
+    res.redirect("/login/admin");
   } catch (error) {
     console.error(error);
     res.status(500).send("Error deleting the data");
@@ -49,7 +49,7 @@ router.get("/admin/delete/:id", async (req, res) => {
 });
 
 //Shyam
-router.get("/user/weblog", async (req, res) => {
+router.get("/login/user/weblog", async (req, res) => {
   try {
       const webdata = await data.find({});
       if (webdata.length > 0) {
@@ -64,7 +64,7 @@ router.get("/user/weblog", async (req, res) => {
 });
 
 //Kowsalya
-router.get("/user/frequentpage", async (req, res) => {
+router.get("/login/user/frequentpage", async (req, res) => {
   try {
     let freqviewpages = await data.aggregate([
       {
@@ -84,7 +84,7 @@ router.get("/user/frequentpage", async (req, res) => {
   }
 });
 //tamilmani code
-router.get("/user/frequentlyviewuser", async (req, res) => {
+router.get("/login/user/frequentlyviewuser", async (req, res) => {
     try {
     const frequentlyviewuser = await data.aggregate([
                 { $group: { _id: "$user_name", count: { $sum: 1 } } },
